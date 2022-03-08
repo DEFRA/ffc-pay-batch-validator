@@ -1,0 +1,14 @@
+{
+  "name": "ffc-pay-validate-checksum",
+  "version": "1.0.0",
+  "description": "Validate checksum of file",
+  "scripts": {
+    "start": "func start -p 7070"
+  },
+  "devDependencies": {
+    "standard": "^16.0.4"
+  },
+  "dependencies": {
+    "@azure/storage-blob": "^12.8.0"
+  }
+}
