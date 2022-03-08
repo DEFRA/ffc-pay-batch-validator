@@ -2,8 +2,27 @@
   "name": "ffc-pay-validate-checksum",
   "version": "1.0.0",
   "description": "Validate checksum of file",
+  "author": "Defra",
+  "contributors": [
+    "John Watson <john.watson2@rpa.gov.uk>"
+  ],
   "scripts": {
-    "start": "func start -p 7070"
+    "lint": "standard",
+    "start": "func start -p 7070",
+    "test": "jest",
+    "test:watch": "jest --coverage=false --onlyChanged --watch"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "beforeEach",
+      "expect",
+      "test",
+      "afterEach",
+      "jest",
+      "beforeAll",
+      "afterAll"
+    ]
   },
   "devDependencies": {
     "standard": "^16.0.4"
