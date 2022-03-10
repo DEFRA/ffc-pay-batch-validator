@@ -1,5 +1,5 @@
 {
-  "name": "ffc-pay-validate-checksum",
+  "name": "ffc-pay-batch-validator",
   "version": "1.0.0",
   "description": "Validate checksum of file",
   "author": "Defra",
