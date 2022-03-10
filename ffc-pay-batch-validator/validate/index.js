@@ -6,7 +6,6 @@ const failure = require('./failure')
 
 const validate = async (pendingFilenames, processedFilenames) => {
   storage.connect(process.env.BATCH_STORAGE)
-
   const [checksumFile, batchFile] = await getFiles(pendingFilenames)
 
   if (verifyContent(batchFile, checksumFile)) {
