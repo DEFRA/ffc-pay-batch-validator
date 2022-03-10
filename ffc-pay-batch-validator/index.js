@@ -1,36 +1,37 @@
 const retry = require('./retry')
 const storage = require('./storage')
 const { verifyContent } = require('./checksum')
-const getFileNames = require('./filenames')
+const { getPendingFilenames, getProcessedFilenames } = require('./filenames')
 
 module.exports = async function (context, myBlob) {
   context.log('File received \n Blob:', context.bindingData.blobTrigger, '\n Blob Size:', myBlob.length, 'Bytes')
-  const { controlFileName, batchFileName, checksumControlFileName, checksumFilename } = getFileNames(context.bindingData.blobTrigger)
+  const pendingFilenames = getPendingFilenames(context.bindingData.blobTrigger)
+  const processedFilenames = getProcessedFilenames(pendingFilenames)
 
   storage.connect(process.env.BATCH_STORAGE)
 
   const [checksumControlFile, checksumFile, batchFile] = await Promise.all([
-    retry(() => storage.getChecksumFile(checksumControlFileName)),
-    retry(() => storage.getChecksumFile(checksumFilename)),
-    retry(() => storage.getChecksumFile(batchFileName))
+    retry(() => storage.getChecksumFile(pendingFilenames.checksumControlFilename)),
+    retry(() => storage.getChecksumFile(pendingFilenames.checksumFilename)),
+    retry(() => storage.getChecksumFile(pendingFilenames.batchFilename))
   ])
 
   if (verifyContent(batchFile, checksumFile)) {
     console.log('Preparing files for processing')
-    await storage.renameFile(controlFileName, controlFileName.replace('PENDING_', ''))
-    await storage.renameFile(batchFileName, batchFileName.replace('PENDING_', ''))
-    await storage.renameFile(checksumControlFileName, checksumControlFileName.replace('PENDING_', ''))
-    await storage.renameFile(checksumFilename, checksumFilename.replace('PENDING_', ''))
-    await storage.archiveFile(checksumControlFileName.replace('PENDING_', ''))
-    await storage.archiveFile(checksumFilename.replace('PENDING_', ''))
-    await storage.archiveFile(controlFileName.replace('PENDING_', ''))
-
+    await storage.renameFile(pendingFilenames.controlFilename, processedFilenames.controlFilename)
+    await storage.renameFile(pendingFilenames.batchFilename, processedFilenames.batchFilename)
+    await storage.renameFile(pendingFilenames.checksumControlFilename, processedFilenames.checksumControlFilename)
+    await storage.renameFile(pendingFilenames.checksumFilename, processedFilenames.checksumFilename)
+    console.log('Renamed files')
+    await storage.archiveFile(processedFilenames.checksumControlFilename)
+    await storage.archiveFile(processedFilenames.checksumFilename)
+    await storage.archiveFile(processedFilenames.controlFilename)
     console.log('Files successfully processed')
   } else {
     console.log('Quarantining file')
-    await storage.quarantineFile(controlFileName)
-    await storage.quarantineFile(batchFileName)
-    await storage.quarantineFile(checksumControlFileName)
-    await storage.quarantineFile(checksumFilename)
+    await storage.quarantineFile(pendingFilenames.controlFilename)
+    await storage.quarantineFile(pendingFilenames.batchFilename)
+    await storage.quarantineFile(pendingFilenames.checksumControlFilename)
+    await storage.quarantineFile(pendingFilenames.checksumFilename)
   }
 }

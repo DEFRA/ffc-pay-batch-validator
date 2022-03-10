@@ -1,10 +1,22 @@
-const getFileNames = (triggerFile) => {
+const getPendingFilenames = (triggerFile) => {
   return {
-    controlFileName: triggerFile,
-    batchFileName: triggerFile.replace('CTL_', ''),
-    checksumControlFileName: triggerFile.replace('.dat', '.txt'),
+    controlFilename: triggerFile,
+    batchFilename: triggerFile.replace('CTL_', ''),
+    checksumControlFilename: triggerFile.replace('.dat', '.txt'),
     checksumFilename: triggerFile.replace('CTL_', '').replace('.dat', '.txt')
   }
 }
 
-module.exports = getFileNames
+const getProcessedFilenames = (pendingFilenames) => {
+  return {
+    controlFilename: pendingFilenames.controlFilename.replace('PENDING_', ''),
+    batchFilename: pendingFilenames.batchFilename.replace('PENDING_', ''),
+    checksumControlFilename: pendingFilenames.checksumControlFilename.replace('PENDING_', ''),
+    checksumFilename: pendingFilenames.checksumFilename.replace('PENDING_', '')
+  }
+}
+
+module.exports = {
+  getPendingFilenames,
+  getProcessedFilenames
+}
