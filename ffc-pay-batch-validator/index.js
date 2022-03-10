@@ -6,5 +6,5 @@ module.exports = async function (context, myBlob) {
   const pendingFilenames = getPendingFilenames(context.bindingData.blobTrigger)
   const processedFilenames = getProcessedFilenames(pendingFilenames)
 
-  await validate(pendingFilenames, processedFilenames)
+  await validate(context, pendingFilenames, processedFilenames)
 }

@@ -15,12 +15,12 @@ const getBlob = async (folder, filename) => {
   return container.getBlockBlobClient(`${folder}/${filename}`)
 }
 
-const getChecksumFile = async (filename) => {
+const getFile = async (context, filename) => {
   filename = sanitizeFilename(filename)
-  console.log(`Searching for ${filename}`)
+  context.log(`Searching for ${filename}`)
   const blob = await getBlob(inboundFolder, filename)
   const downloaded = await blob.downloadToBuffer()
-  console.log(`Found ${filename}`)
+  context.log(`Found ${filename}`)
   return downloaded.toString()
 }
 
@@ -57,7 +57,7 @@ const sanitizeFilename = (filename) => {
 
 module.exports = {
   connect,
-  getChecksumFile,
+  getFile,
   renameFile,
   archiveFile,
   quarantineFile

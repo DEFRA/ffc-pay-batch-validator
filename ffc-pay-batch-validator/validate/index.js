@@ -4,14 +4,14 @@ const getFiles = require('../get-files')
 const success = require('./success')
 const failure = require('./failure')
 
-const validate = async (pendingFilenames, processedFilenames) => {
+const validate = async (context, pendingFilenames, processedFilenames) => {
   storage.connect(process.env.BATCH_STORAGE)
-  const [checksumFile, batchFile] = await getFiles(pendingFilenames)
+  const [checksumFile, batchFile] = await getFiles(context, pendingFilenames)
 
   if (verifyContent(batchFile, checksumFile)) {
-    await success(pendingFilenames, processedFilenames)
+    await success(context, pendingFilenames, processedFilenames)
   } else {
-    await failure(pendingFilenames, processedFilenames)
+    await failure(context, pendingFilenames, processedFilenames)
   }
 }
 
