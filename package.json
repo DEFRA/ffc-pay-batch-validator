@@ -25,9 +25,11 @@
     ]
   },
   "devDependencies": {
-    "standard": "^16.0.4"
+    "standard": "^16.0.4",
+    "jest": "^27.5.1",
+    "jest-junit": "^13.0.0"
   },
   "dependencies": {
-    "@azure/storage-blob": "^12.8.0"
+    "@azure/storage-blob": "^12.9.0"
   }
 }

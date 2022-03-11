@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="4" failures="0" errors="0" time="2.162">
+  <testsuite name="validation" errors="0" failures="0" skipped="0" timestamp="2022-03-11T23:36:56" time="1.818" tests="4">
+    <testcase classname="validation should rename all files on success" name="validation should rename all files on success" time="0.056">
+    </testcase>
+    <testcase classname="validation should archive control files and checksum on success" name="validation should archive control files and checksum on success" time="0.005">
+    </testcase>
+    <testcase classname="validation should quarantine all files on failure" name="validation should quarantine all files on failure" time="0.009">
+    </testcase>
+    <testcase classname="validation should throw error if file missing" name="validation should throw error if file missing" time="1.016">
+    </testcase>
+  </testsuite>
+</testsuites>
