@@ -25,7 +25,7 @@ On successful validation, `PENDING_` is dropped from all filenames and all but t
 
 To support local development of Azure blob storage, there are several options:
 
-1. Use the Docker Compose file in this repository.
+1. Use the Docker Compose file in this repository (recommended).
 
 Running the below command will run an Azurite container.
 
@@ -38,6 +38,10 @@ See [Microsoft's guide](https://docs.microsoft.com/en-us/azure/storage/common/st
 3. Use Azure cloud hosted storage
 
 If any option other than `1` is taken, then the connection strings in `local.settings.json` will need to be updated.
+
+## Configuration
+
+The `local.settings.json` is used to hold all local development environment values.  This file assumes option `1` above is taken and therefore contains no sensitive values and can be committed to source control.
 
 ## Running the application
 
