@@ -17,7 +17,7 @@ On successful validation, `PENDING_` is dropped from all filenames and all but t
 
 ## Prerequisites
 
-- Node.js 16+
+- Node.js LTS 16+
 - access to an Azure blob storage account (see options below)
 - [Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v4%2Clinux%2Ccsharp%2Cportal%2Cbash)
 
