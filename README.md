@@ -57,11 +57,17 @@ The `local.settings.json` is used to hold all local development environment valu
 
 ## Running the application
 
-`npm start`
+Use the convenience script, `./scripts/start`
 
 ### Running tests
 
-`npm run test` or `npm run test:watch` to run with file watching to support Test Driven Development (TDD)
+```
+# Run all tests
+./scripts/test
+
+# Run tests with file watch
+./scripts/test -w
+```
 
 ## CI pipeline
 
