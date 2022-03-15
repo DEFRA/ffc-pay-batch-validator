@@ -9,7 +9,6 @@ services:
     ports:
       - "10004:10000"
       - "10005:10001"
-      - "10006:10002"
 
 volumes:
   azurite_data:

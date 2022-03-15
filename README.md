@@ -54,6 +54,7 @@ The `local.settings.json` is used to hold all local development environment valu
 }
 ```
 > Note: if you wish to run this service end to end with [Payment Batch Processor](https://github.com/DEFRA/ffc-pay-batch-processor), then update the `BATCH_STORAGE` environment variable to use port `10000` instead of `10004`.
+
 ## Running the application
 
 `npm start`
