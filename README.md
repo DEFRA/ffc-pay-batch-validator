@@ -43,6 +43,17 @@ If any option other than `1` is taken, then the connection strings in `local.set
 
 The `local.settings.json` is used to hold all local development environment values.  This file assumes option `1` above is taken and therefore contains no sensitive values and can be committed to source control.
 
+```
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10004/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10005/devstoreaccount1;",
+    "BATCH_STORAGE": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10004/devstoreaccount1;"
+  }
+}
+```
+> Note: if you wish to run this service end to end with [Payment Batch Processor](https://github.com/DEFRA/ffc-pay-batch-processor), then update the `BATCH_STORAGE` environment variable to use port `10000` instead of `10004`.
 ## Running the application
 
 `npm start`
