@@ -9,7 +9,7 @@ const validate = async (context, pendingFilenames, processedFilenames) => {
   storage.connect(storageConnectionString)
   const [checksumFile, batchFile] = await getFiles(context, pendingFilenames)
 
-  if (verifyContent(batchFile, checksumFile)) {
+  if (verifyContent(context, batchFile, checksumFile)) {
     await success(context, pendingFilenames, processedFilenames)
   } else {
     await failure(context, pendingFilenames, processedFilenames)
