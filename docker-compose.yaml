@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   ffc-pay-batch-validator-azurite:
-    image: mcr.microsoft.com/azure-storage/azurite
+    image: mcr.microsoft.com/azure-storage/azurite:3.17.1
     command: "azurite --blobHost 0.0.0.0 --queueHost 0.0.0.0 --loose"
     volumes:
       - azurite_data:/data
