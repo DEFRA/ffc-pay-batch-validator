@@ -12,7 +12,7 @@
   "scripts": {
     "lint": "standard",
     "start": "func start -p 7079",
-    "start:detached": "func start -p 7079 1> /dev/null 2> /dev/null &",
+    "start:detached": "func start -p 7079 1> logs/out.log 2> logs/err.log &",
     "start:verbose": "func start -p 7079 --verbose",
     "test": "jest",
     "test:watch": "jest --coverage=false --onlyChanged --watch",
