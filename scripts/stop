@@ -9,5 +9,4 @@ cd "${projectRoot}"
 
 docker-compose down $@ && \
     pgrep -f "^func start -p $azurePort" | xargs kill -9 && \
-    rm -f logs/out.log \
-    rm -f logs/err.log
+    rm -f logs/out.log logs/err.log

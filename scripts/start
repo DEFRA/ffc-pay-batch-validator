@@ -5,8 +5,6 @@ projectRoot="$(a="/$0"; a=${a%/*}; a=${a:-.}; a=${a#/}/; cd "$a/.." || return; p
 
 cd "${projectRoot}"
 
-mkdir -p logs
-
 while :; do
   case $1 in
     -d|--detached)
@@ -24,6 +22,7 @@ done
 
 
 if [ "${detached}" = "true" ]; then
+  mkdir -p logs &&
   docker-compose up -d &&
     npm run start:detached
 elif [ "${verbose}" = "true" ]; then
