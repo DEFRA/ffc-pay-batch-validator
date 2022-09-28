@@ -8,4 +8,5 @@ projectRoot="$(a="/$0"; a=${a%/*}; a=${a:-.}; a=${a#/}/; cd "$a/.." || return; p
 cd "${projectRoot}"
 
 docker-compose down $@ && \
-    pgrep -f "^func start -p $azurePort" | xargs kill -9
+    pgrep -f "^func start -p $azurePort" | xargs kill -9 && \
+    rm -f logs/out.log logs/err.log

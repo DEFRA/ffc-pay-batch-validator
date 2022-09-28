@@ -1,17 +1,18 @@
 {
   "name": "ffc-pay-batch-validator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Validate checksum of file",
   "author": "Defra",
   "contributors": [
     "John Watson <john.watson2@rpa.gov.uk>",
     "Marc Templeton <m.templeton@kainos.com>",
-    "Simon Dunn <simon.dunn1@defra.gov.uk>"
+    "Simon Dunn <simon.dunn1@defra.gov.uk>",
+    "Callum Leighton <callum.leighton@kainos.com>"
   ],
   "scripts": {
     "lint": "standard",
     "start": "func start -p 7079",
-    "start:detached": "func start -p 7079 1> /dev/null 2> /dev/null &",
+    "start:detached": "func start -p 7079 1> logs/out.log 2> logs/err.log &",
     "start:verbose": "func start -p 7079 --verbose",
     "test": "jest",
     "test:watch": "jest --coverage=false --onlyChanged --watch",

@@ -22,6 +22,7 @@ done
 
 
 if [ "${detached}" = "true" ]; then
+  mkdir -p logs &&
   docker-compose up -d &&
     npm run start:detached
 elif [ "${verbose}" = "true" ]; then
