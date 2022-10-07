@@ -1,6 +1,6 @@
 const storage = require('../storage')
 
-const failure = async (context, pendingFilenames, processedFilenames) => {
+const failure = async (context, pendingFilenames) => {
   context.log('Quarantining files')
   await storage.quarantineFile(pendingFilenames.controlFilename)
   await storage.quarantineFile(pendingFilenames.batchFilename)
