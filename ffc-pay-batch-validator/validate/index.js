@@ -12,7 +12,7 @@ const validate = async (context, pendingFilenames, processedFilenames) => {
   if (verifyContent(context, batchFile, checksumFile)) {
     await success(context, pendingFilenames, processedFilenames)
   } else {
-    await failure(context, pendingFilenames, processedFilenames)
+    await failure(context, pendingFilenames)
   }
 }
 
