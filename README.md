@@ -1,17 +1,37 @@
 # FFC Pay Batch Validator
+
 Azure Function to validate integrity of payment batch files before downstream processing.
 
-This function is triggered from a new file written to Azure Blob Storage matching a specific file mask.
+This service is part of the [Strategic Payment Service](https://github.com/DEFRA/ffc-pay-core). 
+Specifically for supporting integration of Siti Agri payment files with the wider payment pipeline.
 
-The file must be written to a `batch` container, a virtual directory named `inbound` and must match the file mask of a payment batch's control file, `batch/inbound/CTL_PENDING_{name}.dat`.
+## Trigger
 
-Once the file is received the function will ensure all related required files are also present before then validating the `sha256` hash in the checksum file against the batch content.
+This function uses an [Azure Blob Storage binding](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob?tabs=in-process%2Cextensionv5%2Cextensionv3&pivots=programming-language-javascript) to trigger the function when a new file is uploaded.
 
-## Required files
+Trigger file activation pre-requisites:
+- must be uploaded to `batch` container
+- must be uploaded to virtual directory `inbound`
+- must match the file mask of a payment batch's control file, `batch/inbound/CTL_PENDING_{name}.dat`
+
+## Validation
+
+There are four files that make up a payment batch.  All four are required before the batch can be validated.
+
+### Required files
+
+| File | Description | Mask |
+| --- | --- | --- |
+| Payment batch file | Contains a collection of payment requests | `PENDING_{name}.dat` |
+
 - payment batch file, `PENDING_{name}.dat`
 - control file, `CTL_PENDING_{name}.dat`
 - checksum file, `PENDING_{name}.txt`
 - checksum control file, `CTL_PENDING_{name}.txt`
+
+The service will ensure all related required files are also present before then validating the `sha256` hash in the checksum file against the batch content.
+
+
 
 On successful validation, `PENDING_` is dropped from all filenames and all but the payment batch file are moved to the `archive` virtual directory.
 
