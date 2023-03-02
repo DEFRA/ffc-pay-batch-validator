@@ -1,3 +1,5 @@
+> This repository has been replaced with [ffc-pay-batch-verifier](https://github.com/DEFRA/ffc-pay-batch-verifier)
+
 # FFC Pay Batch Validator
 Azure Function to validate integrity of payment batch files before downstream processing.
 
